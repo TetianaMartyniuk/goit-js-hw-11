@@ -140,12 +140,12 @@ const generateMarkup = (array) => {
     return markup;
 }
 
-const lightBox = () => {
-    const lightbox = new simpleLightbox('.gallery a', {
-        captions: true,
-        captionSelector: "img",
-        captionsData: "alt",
-        captionPosition: "outside",
-        captionDelay: 250,
-    })
-}
+// const lightBox = () => {
+//     const lightbox = new simpleLightbox('.gallery a', {
+//         captions: true,
+//         captionSelector: "img",
+//         captionsData: "alt",
+//         captionPosition: "outside",
+//         captionDelay: 250,
+//     })
+// }
