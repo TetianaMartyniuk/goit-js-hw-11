@@ -2,6 +2,13 @@ import { Notify } from "notiflix";
 import { Axios } from "axios";
 import simpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
+const lightbox = new simpleLightbox('.gallery a', {
+        captions: true,
+        captionSelector: "img",
+        captionsData: "alt",
+        captionPosition: "outside",
+        captionDelay: 250,
+    })
 
 const refs = {
     searchForm: document.querySelector(".search-form"),
@@ -30,7 +37,7 @@ buttonLoadMore.addEventListener("click", showMorePhotos)
 
 
 function searchPhotos(e) {
-    e.preventDefault();
+  e.preventDefault();
     gallery.innerHTML = "";
     request = "";
     request = e.target.firstElementChild.value;
@@ -47,7 +54,6 @@ async function handlePhotos(request) {
         return response.json()
       });
       markupPhotos(response);
-    // lightBox(); 
   } catch (error) {
     Notify.failure("Sorry, there are no images matching your search query. Please try again.")
     };
@@ -85,7 +91,8 @@ function markupPhotos(obg) {
         }
     let markup = generateMarkup(array);
     gallery.innerHTML = markup;
-    lightBox();
+    // lightBox();
+  lightbox.refresh();
     page += 1;
     totalHits = obg.totalHits;
     Notify.info(`Hooray! We found ${totalHits} images.`)
@@ -97,10 +104,13 @@ function addMarkupPhotos(obg) {
     if (array.length === 0) {
         Notify.failure("Sorry, there are no images matching your search query. Please try again.")
         return
-        }
+    }
+    page += 1;
     const markup = generateMarkup(array);
     gallery.insertAdjacentHTML("beforeend", markup);
-    lightBox();
+    // lightBox();
+  lightbox.refresh();
+  
 }
 
 const generateMarkup = (array) => {
@@ -139,4 +149,3 @@ const lightBox = () => {
         captionDelay: 250,
     })
 }
-
