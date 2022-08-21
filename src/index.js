@@ -53,7 +53,11 @@ async function handlePhotos(request) {
         }
         return response.json()
       });
-      markupPhotos(response);
+    markupPhotos(response);
+    if (gallery.children.length >= totalHits) {
+          buttonLoadMore.classList.add("hidden");
+           return Notify.warning("We're sorry, but you've reached the end of search results.")     
+      }
   } catch (error) {
     Notify.failure("Sorry, there are no images matching your search query. Please try again.")
     };
@@ -71,8 +75,7 @@ async function showMorePhotos(e) {
       addMarkupPhotos(response);
       if (gallery.children.length >= totalHits) {
           buttonLoadMore.classList.add("hidden");
-           return Notify.warning("We're sorry, but you've reached the end of search results.")
-                
+           return Notify.warning("We're sorry, but you've reached the end of search results.")     
       }
     //   lightBox();
       
