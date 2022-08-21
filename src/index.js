@@ -1,6 +1,6 @@
 import { Notify } from "notiflix";
 import { Axios } from "axios";
-import SimpleLightbox from "simplelightbox";
+import simpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 const refs = {
@@ -25,6 +25,8 @@ buttonLoadMore.classList.add("hidden")
 searchForm.addEventListener("submit", searchPhotos)
 buttonLoadMore.addEventListener("click", showMorePhotos)
 
+// lightBox();
+
 
 
 function searchPhotos(e) {
@@ -48,7 +50,7 @@ async function handlePhotos(request) {
         return response.json()
       });
     markupPhotos(response);
-      lightBox(); 
+    lightBox(); 
   } catch (error) {
     buttonLoadMore.classList.add("hidden")
     Notify.failure("Sorry, there are no images matching your search query. Please try again.")
@@ -65,12 +67,13 @@ async function showMorePhotos(e) {
             return response.json()
         })
       addMarkupPhotos(response);
-      lightBox();
       if (gallery.children.length >= 500) {
                 buttonLoadMore.classList.add("hidden")
                 Notify.warning("We're sorry, but you've reached the end of search results.")
                 return
-            }
+      }
+      lightBox();
+      
   } catch (error) {
     buttonLoadMore.classList.add("hidden")
     Notify.failure("Sorry, there are no images matching your search query. Please try again.")
@@ -129,7 +132,7 @@ const generateMarkup = (array) => {
 }
 
 const lightBox = () => {
-    const lightbox = new SimpleLightbox('.gallery a', {
+    const lightbox = new simpleLightbox('.gallery a', {
         captions: true,
         captionSelector: "img",
         captionsData: "alt",
