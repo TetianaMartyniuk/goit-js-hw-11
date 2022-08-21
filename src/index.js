@@ -19,7 +19,7 @@ const refs = {
 
 const { searchForm, buttonSearch, buttonLoadMore, gallery } = refs;
 
-let page = 1;
+let page;
 const limit = 40;
 let totalHits;
 let limitPages = totalHits / limit;
@@ -38,6 +38,7 @@ buttonLoadMore.addEventListener("click", showMorePhotos)
 
 function searchPhotos(e) {
   e.preventDefault();
+  page = 1;
     gallery.innerHTML = "";
     request = "";
     request = e.target.firstElementChild.value;
