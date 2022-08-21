@@ -47,7 +47,7 @@ async function handlePhotos(request) {
         return response.json()
       });
       markupPhotos(response);
-    lightBox(); 
+    // lightBox(); 
   } catch (error) {
     Notify.failure("Sorry, there are no images matching your search query. Please try again.")
     };
@@ -68,7 +68,7 @@ async function showMorePhotos(e) {
            return Notify.warning("We're sorry, but you've reached the end of search results.")
                 
       }
-      lightBox();
+    //   lightBox();
       
   } catch (error) {
     Notify.failure("Sorry, there are no images matching your search query. Please try again.")
@@ -85,6 +85,7 @@ function markupPhotos(obg) {
         }
     let markup = generateMarkup(array);
     gallery.innerHTML = markup;
+    lightBox();
     page += 1;
     totalHits = obg.totalHits;
     Notify.info(`Hooray! We found ${totalHits} images.`)
@@ -99,6 +100,7 @@ function addMarkupPhotos(obg) {
         }
     const markup = generateMarkup(array);
     gallery.insertAdjacentHTML("beforeend", markup);
+    lightBox();
 }
 
 const generateMarkup = (array) => {
