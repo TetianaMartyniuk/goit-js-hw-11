@@ -63,15 +63,14 @@ async function showMorePhotos(e) {
             return response.json()
         })
       addMarkupPhotos(response);
-      if (gallery.children.length >= 500) {
-                buttonLoadMore.classList.add("hidden")
-                Notify.warning("We're sorry, but you've reached the end of search results.")
-                return
+      if (gallery.children.length >= totalHits) {
+          buttonLoadMore.classList.add("hidden");
+           return Notify.warning("We're sorry, but you've reached the end of search results.")
+                
       }
       lightBox();
       
   } catch (error) {
-
     Notify.failure("Sorry, there are no images matching your search query. Please try again.")
   }
 }
