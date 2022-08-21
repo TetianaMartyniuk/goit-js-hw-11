@@ -35,9 +35,6 @@ function searchPhotos(e) {
     request = "";
     request = e.target.firstElementChild.value;
     handlePhotos(request);
-    if (page >= 1) {
-       buttonLoadMore.classList.remove("hidden") 
-    }
 }
 
 async function handlePhotos(request) {
@@ -49,12 +46,11 @@ async function handlePhotos(request) {
         }
         return response.json()
       });
-    markupPhotos(response);
+      markupPhotos(response);
     lightBox(); 
   } catch (error) {
-    buttonLoadMore.classList.add("hidden")
     Notify.failure("Sorry, there are no images matching your search query. Please try again.")
-  };
+    };
 }
 
 async function showMorePhotos(e) {
@@ -75,7 +71,7 @@ async function showMorePhotos(e) {
       lightBox();
       
   } catch (error) {
-    buttonLoadMore.classList.add("hidden")
+
     Notify.failure("Sorry, there are no images matching your search query. Please try again.")
   }
 }
@@ -84,6 +80,7 @@ async function showMorePhotos(e) {
 function markupPhotos(obg) {
     const array = obg.hits;
     if (array.length === 0) {
+        buttonLoadMore.classList.add("hidden")
         Notify.failure("Sorry, there are no images matching your search query. Please try again.")
         return
         }
@@ -128,6 +125,7 @@ const generateMarkup = (array) => {
             </div>
         </div></a>`
     }).join("")
+    buttonLoadMore.classList.remove("hidden");
     return markup;
 }
 
